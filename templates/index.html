@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CareerLift - Find Your Dream Career</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="CareerLift Logo">
+      <span>CareerLift</span>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <nav id="navbar">
+      <ul class="iii">
+        <li class="dropdown">
+          <a href="#">Find Jobs ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="#">By Skill & Location</a></li>
+            <li><a href="#">By Company</a></li>
+            <li><a href="#">RSS Feeds</a></li>
+            <li><a href="#">Public API</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Boost Your Career</a></li>
+
+        {% if session.get('user') %}
+          <li><a href="#">Welcome, {{ session['user'] }}</a></li>
+          <li><a href="/logout">Logout</a></li>
+        {% else %}
+          <li><a href="#" onclick="openModal('loginModal')">Login</a></li>
+        {% endif %}
+
+        <li><a href="#">For Employers</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <h1>Launch Your Career Without Limits</h1>
+    <p>CareerLift connects you to careers and learning paths built for your future.</p>
+
+    <div class="tags">
+      <span>Software Development</span>
+      <span>Data Analysis</span>
+      <span>UI/UX Design</span>
+      <span>Marketing</span>
+      <span>Product</span>
+      <span>Project Management</span>
+      <span>QA</span>
+      <span>Writing</span>
+      <span>All Roles</span>
+    </div>
+  </main>
+
+  <footer>
+    <p>CareerLift © 2025 | Powered by Open Jobs API</p>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Login to CareerLift</h2>
+      <form id="loginForm" method="POST" action="/login">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+        <p class="modal-switch">Don't have an account? 
+          <a href="#" onclick="switchModal()">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('signupModal')">&times;</span>
+      <h2>Create Your CareerLift Account</h2>
+      <form id="signupForm" method="POST" action="/signup" onsubmit="return validateSignup()">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required />
+        <button type="submit">Sign Up</button>
+        <p class="modal-switch">Already have an account? 
+          <a href="#" onclick="switchModal(true)">Log in</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
