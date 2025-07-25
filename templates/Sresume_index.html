@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerLift Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 100px; }
+        button { padding: 10px 20px; margin-top: 10px; }
+        .results { margin-top: 20px; }
+        .job { border: 1px solid #ccc; padding: 10px; margin-top: 5px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h1>CareerLift – AI Job Recommendations</h1>
+    <p>Enter your resume text below:</p>
+    <textarea id="resume"></textarea><br>
+    <button onclick="analyzeResume()">Analyze & Recommend</button>
+
+    <div class="results" id="results"></div>
+
+    <script>
+        async function analyzeResume() {
+            const resumeText = document.getElementById("resume").value;
+            if (!resumeText.trim()) {
+                alert("Please paste your resume text!");
+                return;
+            }
+
+            const response = await fetch("/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: resumeText })
+            });
+
+            const data = await response.json();
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "<h3>Extracted Skills:</h3><p>" + data.skills.join(", ") + "</p>";
+
+            resultsDiv.innerHTML += "<h3>Top Job Matches:</h3>";
+            data.recommended_jobs.forEach(job => {
+                resultsDiv.innerHTML += <div class="job"><strong>${job.job}</strong> - Match: ${job.match_percent}%</div>;
+            });
+        }
+    </script>
+</body>
+</html>
+
+ 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editable Modern Resume</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      background-color: #121212;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      padding: 20px;
+    }
+    #resume {
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      width: 800px;
+      margin: auto;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .editable {
+      border-bottom: 1px dashed #888;
+      min-height: 20px;
+      padding: 4px;
+      color: #e2e2e2;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">🖤 Modern Resume Template</h2>
+  <div id="resume">
+    <h1 contenteditable="true" class="editable">Your Name</h1>
+    <p contenteditable="true" class="editable">Email: your@email.com</p>
+
+    <h2>Education</h2>
+    <p contenteditable="true" class="editable">Add your education here...</p>
+
+    <h2>Skills</h2>
+    <p contenteditable="true" class="editable">Add your skills here...</p>
+
+    <h2>Experience</h2>
+    <p contenteditable="true" class="editable">Add your work experience...</p>
+  </div>
+
+  <br>
+  <center><button onclick="downloadPDF()">📄 Download PDF</button></center>
+
+  <script>
+    function downloadPDF() {
+      html2pdf().from(document.getElementById("resume")).save("modern_resume.pdf");
+    }
+  </script>
+</body>
+</html>
