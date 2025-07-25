@@ -24,10 +24,14 @@ except OSError:
 
 # ---------- Auth ----------
 @app.route("/")
+@app.route("/")
 def index():
-    if "user_id" in session:
-        return redirect("/dashboard")
     return render_template("index.html")
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route("/signup", methods=["POST"])
 def signup():

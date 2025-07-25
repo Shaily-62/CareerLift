@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - CareerLift</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(173, 216, 230, 0.5)),
+                  url('{{ url_for("static", filename="img/about-team.jpg") }}') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .about-container {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .about-hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .about-hero .text {
+      flex: 1;
+    }
+
+    .counters {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+    }
+
+    .counter-box {
+      text-align: center;
+    }
+
+    .counter-box h2 {
+      font-size: 2.5rem;
+      color: #76c7ff;
+    }
+
+    .team-section {
+      margin-top: 60px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .team-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      width: 220px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      animation: slideUp 0.7s ease;
+    }
+
+    .team-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #76c7ff;
+    }
+
+     .team-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .about-hero {
+        flex-direction: column;
+      }
+      .counters {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about-container">
+    <div class="about-hero">
+      <div class="text">
+        <h1>About CareerLift</h1>
+        <p>CareerLift empowers students and job seekers with AI-driven job matching, smart resume feedback, and career guidance. We aim to revolutionize the hiring process by making it smarter, faster, and more personalized.</p>
+      </div>
+    </div>
+
+    <div class="counters">
+      <div class="counter-box">
+        <h2 id="user-count">0</h2>
+        <p>Happy Users</p>
+      </div>
+      <div class="counter-box">
+        <h2 id="jobs-count">0</h2>
+        <p>Jobs Listed</p>
+      </div>
+      <div class="counter-box">
+        <h2 id="feedback-count">0</h2>
+        <p>Resume Reviews</p>
+      </div>
+    </div>
+
+    <div class="team-section">
+      <h2>Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='img/member1.jpg') }}" alt="Team Member">
+          <h3>Sharvari</h3>
+          <p>Frontend Developer</p>
+        </div>
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='img/member2.jpg') }}" alt="Team Member">
+          <h3>Vaishnavi</h3>
+          <p>UI/UX Designer</p>
+        </div>
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='img/member3.jpg') }}" alt="Team Member">
+          <h3>Azra</h3>
+          <p>Backend Engineer</p>
+        </div>
+        <div class="team-card">
+          <img src="{{ url_for('static', filename='img/member3.jpg') }}" alt="Team Member">
+          <h3>Shaily</h3>
+          <p>Backend Engineer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Counter animation
+    const counters = [
+      { id: "user-count", target: 1500 },
+      { id: "jobs-count", target: 320 },
+      { id: "feedback-count", target: 860 }
+    ];
+
+    counters.forEach(counter => {
+      let count = 0;
+      const step = Math.ceil(counter.target / 100);
+      const el = document.getElementById(counter.id);
+      const interval = setInterval(() => {
+        count += step;
+        if (count >= counter.target) {
+          count = counter.target;
+          clearInterval(interval);
+        }
+        el.innerText = count;
+      }, 20);
+    });
+  </script>
+</body>
+</html>

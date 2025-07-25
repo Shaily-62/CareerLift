@@ -14,6 +14,11 @@ cursor = db.cursor()
 def index():
     return render_template("index.html")
 
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route("/signup", methods=["POST"])
 def signup():
     name = request.form["name"]
@@ -53,6 +58,9 @@ def login():
 def logout():
     session.clear()
     return redirect("/")
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
