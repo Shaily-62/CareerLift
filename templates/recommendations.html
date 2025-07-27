@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recommended Courses</title>
+</head>
+<body>
+  <h2>Extracted Skills:</h2>
+  <ul>
+    {% for skill in skills %}
+      <li>{{ skill }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Recommended Courses</h2>
+  <ul>
+    {% for course in courses %}
+      <li><a href="{{ course.course_url }}">{{ course.course_name }}</a> - {{ course.platform }} ({{ course.rating }})</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
