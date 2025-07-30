@@ -11,6 +11,8 @@ def index():
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
+
+    
     if 'resume' in request.files:
         resume = request.files['resume']
         skills = extract_skills_from_pdf(resume)
