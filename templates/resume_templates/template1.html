@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume - {{ name }}</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 40px;
+      color: #333;
+    }
+    h1 {
+      color: #6a1b9a;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .contact {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #6a1b9a;
+      font-size: 20px;
+      border-bottom: 2px solid #eee;
+      margin-top: 30px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .job-title {
+      font-weight: bold;
+    }
+    .job-dates {
+      float: right;
+      font-size: 14px;
+      color: #666;
+    }
+    .education, .experience {
+      margin-bottom: 10px;
+    }
+    ul {
+      margin-top: 6px;
+      padding-left: 20px;
+    }
+    .bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ name }}</h1>
+  <div class="contact">
+    {{ address }} • {{ phone }} • {{ email }}<br>
+    {{ website }}
+  </div>
+
+  <h2>SUMMARY</h2>
+  <div class="section">
+    {{ summary }}
+  </div>
+
+  <h2>WORK EXPERIENCE</h2>
+  {% for job in work_experience %}
+    <div class="section">
+      <div class="job-title">{{ job.title }} , {{ job.company }}</div>
+      <div class="job-dates">{{ job.date }}</div>
+      <ul>
+        {% for point in job.points %}
+          <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+
+  <h2>EDUCATION</h2>
+  {% for edu in education %}
+    <div class="section education">
+      <div class="bold">{{ edu.degree }}</div>
+      <div>{{ edu.institution }}</div>
+      <div class="job-dates">{{ edu.date }}</div>
+      <ul>
+        {% for point in edu.details %}
+          <li>{{ point }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+
+  <h2>ADDITIONAL INFORMATION</h2>
+  <div class="section">
+    <p><span class="bold">Technical Skills:</span> {{ skills }}</p>
+    <p><span class="bold">Languages:</span> {{ languages }}</p>
+    <p><span class="bold">Certifications:</span> {{ certifications }}</p>
+    <p><span class="bold">Awards/Activities:</span> {{ awards }}</p>
+  </div>
+</body>
+</html>

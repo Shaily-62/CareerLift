@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Resume Preview</title></head>
+<body>
+  <h1>{{ data.name }}</h1>
+  <p><strong>Email:</strong> {{ data.email }}</p>
+  <p><strong>Skills:</strong> {{ data.skills }}</p>
+  <p><strong>Education:</strong> {{ data.education }}</p>
+
+  <form action="/download_resume" method="post">
+    {% for key, value in data.items() %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endfor %}
+    <input type="hidden" name="template" value="{{ template }}">
+    <button type="submit">Download PDF</button>
+  </form>
+</body>
+</html>

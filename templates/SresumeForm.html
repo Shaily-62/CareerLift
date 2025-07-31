@@ -1,25 +1,153 @@
 <!DOCTYPE html>
-<html>
-<head><title>Create Resume</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLift - Create Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 80px 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #161b22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      color: #58a6ff;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      color: #c9d1d9;
+      margin-left: 20px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #58a6ff;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #161b22;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #58a6ff;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    button {
+      flex: 1;
+      background-color: #238636;
+      color: white;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+  </style>
+</head>
 <body>
-  <h2>Create Your Resume</h2>
-  <form method="POST" action="/generate_resume">
-    <label>Name:</label><br>
-    <input type="text" name="name"><br><br>
+  <header>
+    <div class="logo">CareerLift</div>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+    </nav>
+  </header>
 
-    <label>Email:</label><br>
-    <input type="text" name="email"><br><br>
+  <div class="form-container">
+    <h2>📝 Create Your Resume</h2>
+    <form method="POST" action="/generate_resume" target="_blank">
+      <label>Name:</label>
+      <input type="text" name="name" required>
 
-    <label>Education:</label><br>
-    <textarea name="education"></textarea><br><br>
+      <label>Email:</label>
+      <input type="email" name="email" required>
 
-    <label>Skills:</label><br>
-    <textarea name="skills"></textarea><br><br>
+      <label>Phone:</label>
+      <input type="text" name="phone" required>
 
-    <label>Experience:</label><br>
-    <textarea name="experience"></textarea><br><br>
+      <label>LinkedIn:</label>
+      <input type="text" name="linkedin">
 
-    <button type="submit">Generate Resume PDF</button>
-  </form>
+      <label>Education:</label>
+      <textarea name="education" rows="4"></textarea>
+
+      <label>Skills:</label>
+      <textarea name="skills" rows="3"></textarea>
+
+      <label>Certifications:</label>
+      <textarea name="certifications" rows="3"></textarea>
+
+      <label>Projects:</label>
+      <textarea name="projects" rows="4"></textarea>
+
+      <label>Experience:</label>
+      <textarea name="experience" rows="4"></textarea>
+
+      <div class="button-group">
+        <button type="submit" formaction="/preview_resume">Preview Resume</button>
+        <button type="submit">Download PDF</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerLift Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>CareerLift</h2>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Applications</a></li>
+      <li><a href="#">Saved Jobs</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>Welcome, {{ username }} 👋</h1>
+
+    <div class="stats">
+      <div class="card">Applications <span>{{ applications }}</span></div>
+      <div class="card">Interviews <span>{{ interviews }}</span></div>
+      <div class="card">Saved Jobs <span>{{ saved_jobs }}</span></div>
+      <div class="card">Skills Gained <span>{{ skills }}</span></div>
+    </div>
+
+    <div class="actions">
+      <button onclick="window.location.href='/create_resume'">📝 Create Resume</button>
+      <button onclick="window.location.href='/enhanced_resume'">🌟 Enhanced Resume</button>
+      <button onclick="window.location.href='/recommend_Jobs'"> 📚recommend_Jobs</button>
+      <button onclick="window.location.href='/recommend_courses'">📚 Course Recommendation</button>
+    </div>
+
+    <h3>Career Progress</h3>
+    <canvas id="careerChart" width="600" height="300"></canvas>
+
+    <!-- <lottie-player 
+      src="https://assets2.lottiefiles.com/packages/lf20_jtbfg2nb.json" 
+      background="transparent" 
+      speed="1" 
+      style="width: 300px; height: 300px;" 
+      loop 
+      autoplay>
+    </lottie-player> -->
+  </div>
+
+  <script>
+    const ctx = document.getElementById('careerChart').getContext('2d');
+    const careerChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Applications', 'Interviews', 'Saved Jobs', 'Skills'],
+        datasets: [{
+          label: 'Career Stats',
+          data: [{{ applications }}, {{ interviews }}, {{ saved_jobs }}, { { skills } }],
+    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+        } ]
+      }
+    });
+  </script>
+</body>
+
+</html>
