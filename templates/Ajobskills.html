@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job Role Predictor</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            background: #f3f6fd;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #1f2937;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #374151;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 240px;
+            padding: 30px;
+            flex: 1;
+        }
+
+        h1 {
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59,130,246,0.3);
+        }
+
+        button {
+            width: 100%;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px;
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background-color: #4f46e5;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 16px;
+            min-height: 48px;
+            color: #1f2937;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            margin-top: 30px;
+        }
+        .courses-title {
+            color: #1f2937;
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .course-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: left;
+            transition: transform 0.2s;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        .course-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+        .course-title a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .course-title a:hover {
+            text-decoration: underline;
+        }
+        .course-difficulty {
+            font-size: 14px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Skills badges */
+        .skills-list span {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px 5px 0 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>CareerLift</h2>
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/search_courses">Courses</a></li>
+            <li><a href="/create_resume">Resume Builder</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Job Role Predictor</h1>
+        <form method="post" action="/search_courses">
+            <div class="input-group">
+                <input type="text" name="jobrole" id="jobrole" placeholder="Type your desired job role..." required autocomplete="off">
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Skills/Prediction -->
+        <div class="result">
+            {{ prediction_text | safe }}
+        </div>
+
+        <!-- Courses Section -->
+        {% if courses %}
+        <div class="courses-section">
+            <div class="courses-title">Recommended Courses:</div>
+            <div class="courses-container">
+                {% for course in courses %}
+                <div class="course-card">
+                    <div class="course-title">
+                        <a href="{{ course.url }}" target="_blank">{{ course.title }}</a>
+                    </div>
+                    <div class="course-difficulty">Difficulty: {{ course.difficulty }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

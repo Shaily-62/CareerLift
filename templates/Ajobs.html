@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerLift - Real-Time Jobs</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>CareerLift</h2>
+    <ul>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="#">Profile</a></li>
+      <li><a href="/search_courses" class="nav-link">Search Courses</a></li>
+      <li><a href="/realtime_jobs" class="nav-link active">Search Jobs</a></li>
+      <li><a href="#">Applications</a></li>
+      <li><a href="#">Saved Jobs</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1>Find Jobs</h1>
+    <form method="post">
+      <input type="text" name="jobrole" placeholder="Job title..." required value="{{ query }}">
+      <input type="text" name="location" placeholder="Location..." value="{{ location }}">
+      <button type="submit">Search</button>
+    </form>
+
+    {% if jobs %}
+    <ul>
+      {% for job in jobs %}
+      <li style="background: white; padding: 10px; margin: 8px 0; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <a href="{{ job.link }}" target="_blank" style="text-decoration: none; color: #4a90e2; font-weight: bold;">{{ job.title }}</a>
+        <span style="font-size: 0.85em; color: #888; margin-left: 5px;">({{ job.source|capitalize }})</span><br>
+        {{ job.company }} - {{ job.location }}<br>
+        {% if job.time_ago %}<em>Posted {{ job.time_ago }}</em>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% elif query %}
+    <p>No jobs found for "{{ query }}"</p>
+    {% endif %}
+  </div>
+</body>
+</html>
