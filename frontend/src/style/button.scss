@@ -1,0 +1,57 @@
+.btn {
+    border: none;
+    outline: none;
+    padding-inline: 1.5rem;
+    padding-block: 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+// Primary Button
+.primary-btn {
+    background: #8b5e3c;
+    color: #f5ede3;
+
+    &:hover {
+        background: #b9825b;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+// Secondary Button
+.secondary-btn {
+    background: transparent;
+    color: #f5ede3;
+    border: 1px solid #4a3930;
+
+    &:hover {
+        background: #30251f;
+        border-color: #8b5e3c;
+    }
+}
+
+// Outline Button
+.outline-btn {
+    background: transparent;
+    color: #b9825b;
+    border: 1px solid #8b5e3c;
+
+    &:hover {
+        background: #8b5e3c;
+        color: #f5ede3;
+    }
+}
